@@ -1,0 +1,8 @@
+plugins/*
+!plugins/.gitkeep
+
+legacyplugins/*
+!legacyplugins/.gitkeep
+
+themes/*
+!themes/.gitkeep

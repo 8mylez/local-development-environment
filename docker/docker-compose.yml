@@ -1,0 +1,39 @@
+shop_8mylez-demo-shop:
+  image: dnhsoft/shopware:5.4.6-php7
+  links:
+   - db_emz
+   - mailhog_emz
+  volumes:
+   #- "./../plugins:/shopware/custom/plugins"
+   #- "./../legacyplugins:/shopware/engine/Shopware/Plugins/Local"
+   #- "./../import:/shopware/import"
+   #- "./../themes:/shopware/themes/Frontend"
+   - "../config/config.php:/shopware/config.php"
+  ports:
+   - "8000:80"
+  environment:
+   SWDB_HOST: db_emz
+   SWDB_DATABASE: 8mylezdemoshop
+
+db_emz:
+  image: tutum/mysql:5.6
+  environment:
+   MYSQL_USER: root
+   MYSQL_PASS: 123456
+
+pma_emz:
+  image: dnhsoft/phpmyadmin:4.6.4
+  links:
+   - db_emz
+  ports:
+   - "8001:80"
+  environment:
+   DBHOST: db_emz
+
+mailhog_emz:
+  image: mailhog/mailhog
+  expose:
+   - "1025"
+   - "8025"
+  ports:
+   - "8025:8025"
